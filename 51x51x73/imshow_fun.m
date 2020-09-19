@@ -22,6 +22,7 @@ XC=1:U1_cols;  %插值前XC坐标YC坐标
 YC=1:U1_rows;
 %其余点spline插值
 U111 = interp2(XC,YC,U1,XI,YI,'cubic');
+
 U111a=sgolayfilt(U111,3,91); %平滑数据 sgolayfilet仅仅对列 3为平滑所用多项式阶数
 U111b=U111a';  %转置对行平滑
 U111c=sgolayfilt(U111b,3,91);
