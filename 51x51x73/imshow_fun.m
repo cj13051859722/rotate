@@ -1,11 +1,22 @@
-function U111d = imshow_fun(U_field,i,num)
+function U111d = imshow_fun(U_field,num_1,num)
 %%
 %U_field待显示位移场 i第i层数据 num为垂直方向
-%获取i层数据并平滑处理数据
+%获取i层数据
+[U_rows,U_cols,U_layers]=size(U_field);
 if num==1
-    U1_0=U_field(i,:,:);
+    U1_0=zeros(U_cols,U_layers);
+    for i=1:1:U_cols
+        for j=1:1:U_layers
+            U1_0(i,j)=U_field(num_1,i,j);
+        end
+    end
 elseif num==2
-    U1_0=U_field(:,i,:);
+    U1_0=zeros(U_rows,U_layers);
+    for i=1:1:U_rows
+        for j=1:1:U_layers
+            U1_0(i,j)=U_field(i,num_1,j);
+        end
+    end
 elseif num==3
     U1_0=U_field(:,:,i);
 end
@@ -39,12 +50,12 @@ colormap(jet);
 colorbar;
 caxis([-50,50]);  %设置颜色范围
 colorbar('Ticks',[-50,-30,-10,10,30,50],... %设置颜色刻度值(原本虚假)
-         'TickLabels',[-50,-30,-10,10,30,50]/(50/U1_max)) %设置颜色刻度值(实际)
+    'TickLabels',[-50,-30,-10,10,30,50]/(50/U1_max)) %设置颜色刻度值(实际)
 axis equal
 box on
 
 %图的范围
-[U111_rows,U111_cols]=size(U111); 
+[U111_rows,U111_cols]=size(U111);
 set(gca,'XLim',[0,U111_cols]);  %所需要图的范围
 set(gca,'YLim',[0,U111_rows]);
 set(gca,'YDir','normal');
@@ -55,10 +66,10 @@ XH_EndPoint=U111_cols-XP_StartPoint;
 YH_EndPoint=U111_rows-YP_StartPoint;
 xxL=[XP_StartPoint,XH_EndPoint];
 yyL=[YP_StartPoint,YH_EndPoint];
-set(gca,'xlim', xxL) ;   
+set(gca,'xlim', xxL) ;
 set(gca,'ylim', yyL) ;
 %%图外围颜色
-set(gcf,'color','white'); 
+set(gcf,'color','white');
 
 %字体
 %字体颜色
@@ -69,7 +80,7 @@ set(h,'LineStyle','none'); %LineStyle线型
 %xy坐标刻度值
 set(gca,'XTick',([XP_StartPoint,0,U111_cols/5,U111_cols*2/5,U111_cols*3/5,U111_cols*4/5,U111_cols,XH_EndPoint]),...
     'XTickLabel',{num2str(-U1_cols/5),'0',num2str(U1_cols/5),num2str(U1_cols*2/5),...
-    num2str(U1_cols*3/5),num2str(U1_cols*4/5),num2str(U1_cols),num2str(U1_cols*6/5)});  
+    num2str(U1_cols*3/5),num2str(U1_cols*4/5),num2str(U1_cols),num2str(U1_cols*6/5)});
 
 set(gca,'YTick',([YP_StartPoint,0,U111_rows/5,U111_rows*2/5,U111_rows*3/5,U111_rows*4/5,U111_rows,YH_EndPoint]),...
     'YTickLabel',{num2str(-U1_rows/5),'0',num2str(U1_rows/5),num2str(U1_rows*2/5),...

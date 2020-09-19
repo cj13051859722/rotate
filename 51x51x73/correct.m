@@ -3,7 +3,7 @@ clc;
 load('Ufield.mat');
 load('Vfield.mat');
 load('Wfield.mat');
-imshow_fun(W_field,70,3);  %%U_field待显示位移场 i第i层数据 num为垂直方向
+imshow_fun(W_field,40,2);  %%U_field待显示位移场 i第i层数据 num为垂直方向
 %%
 %初始化数据
 %数据实际尺寸
@@ -92,4 +92,4 @@ save('URT14','U_PANGING');
 save('VRT14','V_PANGING');
 save('WRT14','W_PANGING');
 %%
-imshow_fun(W_PANGING,70,3);
+imshow_fun(W_PANGING,40,2);

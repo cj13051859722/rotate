@@ -3,11 +3,18 @@ clear;
 %cd('I:\Disk25\1#\data')
 load('Ufield.mat');
 %显示层数
-i=70;
+num_1=50;
 
 %%
 %获取i层数据并平滑处理数据
-U1_0=U_field(:,:,i);  
+[U_rows,U_cols,U_layers]=size(U_field)
+for i=1:1:U_rows
+    for j=1:1:U_layers
+        U1_0(i,j)=U_field(i,num_1,j); 
+    end
+end
+
+
 %数据放大，控制在-50至50之间 数据较大使得显示更加有层次感
 U1_temp=abs(U1_0);
 U1_max=max(max(U1_temp));
